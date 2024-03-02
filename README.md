@@ -1,4 +1,4 @@
-# Macro On Save
+# Macros On Save
 
 A minimal python script you can use anywhere to perform substitutions of your specifications on save.
 
@@ -14,7 +14,7 @@ python macroOnSave/main.py
 5. Edit the `macro_config.json` file to your requirement.
    1. `watch_dir` is the directory which macros will be enabled.
    2. `macro_dir` is the directory where you define your macros.
-6. Re-run `python macroOnSave/main.py` to start the program.
+6. Re-run `python macrosOnSave/main.py` to start the program.
 
 ## Usage
 
