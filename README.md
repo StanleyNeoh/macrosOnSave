@@ -2,6 +2,8 @@
 
 A minimal python script you can use anywhere to perform substitutions of your specifications on save.
 
+https://github.com/StanleyNeoh/macrosOnSave/assets/95394480/9a6bb129-f139-4b8a-96ed-6b7b9d38d9db
+
 ## Setup and installation
 
 1. `git clone` / `git submodule` this repository into the project folder
