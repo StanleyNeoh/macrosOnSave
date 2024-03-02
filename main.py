@@ -6,6 +6,9 @@ last_modified = dict()
 watch_dir = None
 macro_dir = None
 
+replace_start = 'MACRO-START'
+replace_end = 'MACRO-END'
+
 def get_line_replacement(filename):
     for p, dir, files in os.walk(macro_dir):
         for name in files:
@@ -13,7 +16,18 @@ def get_line_replacement(filename):
                 continue
             path = os.path.join(p, name)
             with open(path, 'r') as f:
-                return f.read() + '\n'
+                macroStart = False
+                lines = []
+                for l in f.readlines():
+                    if replace_start in l:
+                        macroStart = True
+                    elif not macroStart:
+                        continue
+                    elif replace_end in l:
+                        break
+                    else:
+                        lines.append(l)
+                return ''.join(lines) + '\n'
     return "<<< Not Found\n"
 
 def substitute_macros(path):

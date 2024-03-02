@@ -30,14 +30,17 @@ int main() {
 }
 ```
 
-And you have defined a macro in `macro/B/bye.cpp`.
+And you have defined a macro in `macro/B/bye.cpp`. Note that only the lines between `...MACRO-START...` and `...MACRO-END...` will be used.
+
 ```cpp
 // macro/B/bye.cpp - Start
 #include <iostream>
+
+// MACRO-START
 void bye() {
     std::cout << "Goodbye\n";
 }
-// End
+// MACRO-END
 ```
 
 Then simply by typing `>>> <substring of macro file name>` like `>>> by` or `>>> bye.c`,
@@ -58,12 +61,9 @@ Turns into the following on save
 // src/A/main.cpp
 #include <iostream>
 
-// macro/B/bye.cpp - Start
-#include <iostream>
 void bye() {
     std::cout << "Goodbye\n";
 }
-// End
 
 int main() {
     std::cout << "Hello World\n";
