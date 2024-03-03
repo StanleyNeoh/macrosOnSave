@@ -16,6 +16,10 @@ python macroOnSave/main.py
 5. Edit the `macro_config.json` file to your requirement.
    1. `watch_dir` is the directory which macros will be enabled.
    2. `macro_dir` is the directory where you define your macros.
+   3. `marker` is the tag before the file name to be substituted.
+   4. `replace_start` is the tag to mark the start of a macro.
+   5. `replace_end` is the tag to mark the end of a macro.
+   6. `refresh_time` is the period which the program will check file saves
 6. Re-run `python macrosOnSave/main.py` to start the program.
 
 ## Usage

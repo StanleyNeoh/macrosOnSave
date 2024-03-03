@@ -1,15 +1,18 @@
 import os, time, json
 
-macro_config_filename = 'macro_config.json'
-marker = '>>>' 
 last_modified = dict()
+macro_config_filename = 'macro_config.json'
+
+marker = None
 watch_dir = None
 macro_dir = None
-
-replace_start = 'MACRO-START'
-replace_end = 'MACRO-END'
+replace_start = None
+replace_end = None
+refresh_time = None
 
 def get_line_replacement(filename):
+    if not filename:
+        return '<<< Empty name\n'
     for p, dir, files in os.walk(macro_dir):
         for name in files:
             if filename not in name:
@@ -61,23 +64,31 @@ def watch_files():
         modified_files = get_modified_files()
         for filepath in modified_files:
             substitute_macros(filepath)
-        time.sleep(1)
+        time.sleep(0.3)
 
 def start():
     if not os.path.exists(macro_config_filename):
         with open(macro_config_filename, 'w') as f:
             f.write(json.dumps({
                 'watch_dir': 'src/',
-                'macro_dir': 'macros/'
+                'macro_dir': 'macros/',
+                'marker': '>>>',
+                'replace_start': 'MACRO-START',
+                'replace_end': 'MACRO-END',
+                'refresh_time': 0.3,
             }, indent=2))
         print(f"Creating new {macro_config_filename}. Please edit the file to your requirements before re-running")
         return
         
-    global watch_dir, macro_dir
+    global watch_dir, macro_dir, marker, replace_start, replace_end, refresh_time
     with open(macro_config_filename) as f:
         config = json.load(f)
         watch_dir = config['watch_dir']
         macro_dir = config['macro_dir']
+        marker = config['marker']
+        replace_start = config['replace_start']
+        replace_end = config['replace_end']
+        refresh_time = config['refresh_time']
     
     if not os.path.exists(watch_dir):
         print(f"{watch_dir} does not exist, please create the directory or update {macro_config_filename}")
